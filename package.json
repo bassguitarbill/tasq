@@ -1,0 +1,27 @@
+{
+  "name": "tasq",
+  "version": "0.0.0",
+  "description": "Task app to remind you to do a certain amount of x every week",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bassguitarbill/tasq.git"
+  },
+  "keywords": [
+    "task",
+    "reminder",
+    "productivity"
+  ],
+  "author": "BassguitarBill",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bassguitarbill/tasq/issues"
+  },
+  "homepage": "https://github.com/bassguitarbill/tasq",
+  "dependencies": {
+    "mongodb": "^2.0.46"
+  }
+}
