@@ -68,7 +68,7 @@ function getQueryPromise(collName, query) {
 	});
 }
 
-getQueryPromise("tasks", {}).then(function(data){console.log(data);});
+//getQueryPromise("tasks", {}).then(function(data){console.log(data);});
 module.exports.getQueryPromise = getQueryPromise;
 
 function insert(collName, document, callback) {
@@ -80,3 +80,48 @@ function insert(collName, document, callback) {
 		);
 	});
 }
+
+function getInsertPromise(collName, document){
+	return new Promise(function(resolve, reject){
+		Client.connect(url, function(err, db) {
+			if(err != null)
+					reject(err);
+			assert.equal(null, err);
+			db.collection(collName).insertOne(
+				document,
+				function(err, result){
+					db.close();
+					resolve(result)
+				}
+			);
+		});
+	});
+}
+module.exports.getInsertPromise = getInsertPromise;
+
+var allDocuments = function(collName){getQueryPromise(collName,{}).then(function(d){console.log(d)})};
+module.exports.allDocuments = allDocuments;
+module.exports.insertThenShow = function(collName, document){getInsertPromise(collName, document).then(function(){allDocuments(collName)})};
+
+//Client.connect(url, function(err, db){db.collection('tasks').update({name: 'speedrunning'}, {$rename: {"schedule.perweek":"schedule.perWeek"}});})
+
+/* 
+sample activity document:
+{ 	
+	name: 'practicing',
+    desc: 'Practice playing, composing, or recording music',
+    color: '#0000ff',
+    schedule: { 
+		duration: 90, perWeek: 2 
+	} 
+}
+
+sample task document:
+{
+	activity: 'programming',
+	start: Sat Oct 17 2015 09:29:30 GMT-0400 (Eastern Daylight Time),
+	end: Sat Oct 17 2015 10:52:31 GMT-0400 (Eastern Daylight Time),
+	goal: 'Improve usability and interface of tasq',
+	journal: 'Renamed collections, added update, began web interface'
+}
+*/

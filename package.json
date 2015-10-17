@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/bassguitarbill/tasq",
   "dependencies": {
+    "express": "^4.13.3",
     "mongodb": "^2.0.46",
     "promise": "^7.0.4"
   }
