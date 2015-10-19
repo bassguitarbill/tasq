@@ -3,11 +3,39 @@
 		<title>tasq</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 		<script src="js/script.js"></script>
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/currentTask.css">
 	</head>
 	<body>
 		<h1>tasq</h1>
 		<h2>A task tracker for the common man</h2>
-		<div id="currentTask"></div>
+		<div class="currentActivity">
+  <div class="topbar">
+    <h3 class="activityName">programming</h3>
+    <p class="activityGoal">figure out how to make this layout work</p>
+  </div>
+  <div class="taskInfo">
+    <div class="verticalTracker" id="weekly">&nbsp;
+      <div class="fill">
+      </div>
+      <div class="line">
+      </div>
+    </div>
+    <div class="timerAndControls">
+      <div class="timer">58 Minutes</div>
+      <div class="controls">
+        <button>Pause</button>
+        <button>Done</button>
+      </div>
+    </div>
+    <div class="verticalTracker" id="taskly">&nbsp;
+      <div class="fill">
+      </div>
+      <div class="line">
+      </div>
+    </div>
+  </div>
+</div>
 		<div id="taskList"></div>
 		<div id="newActivity">
 			<select id="newActivitySelector" class="activitySelector"></select>

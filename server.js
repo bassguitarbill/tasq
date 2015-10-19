@@ -14,6 +14,11 @@ app.get('/activities', function (req, res) {
 		.then(function(d){res.send(d).end();});
 });
 
+app.get('/active-task', function (req, res) {
+	db.getQueryPromise('task',{stopTime: null})
+		.then(function(d){res.send(d).end();});
+});
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.post('/log', function (req, res) {
 	console.log(req.body);

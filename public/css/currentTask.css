@@ -1,0 +1,90 @@
+.currentActivity {
+  border: solid blue 2px;
+  width: 60%;
+  margin: auto;
+  text-align:center;
+}
+
+.topbar {
+  border: solid green 2px;
+  padding:0px;
+  margin:4px;
+}
+
+.taskInfo>div{
+  display:inline-block;
+}
+
+.taskInfo {
+  height:250px;
+  vertical-align:middle;
+}
+
+.verticalTracker{
+  height: 90%;
+  width: 13%;
+  padding:0px;
+  margin:15px;
+  position:relative;
+  font-size:0px;
+  border: solid black 1px;
+}
+
+.fill {
+  margin:0px;
+  padding:0px;
+  width:100%;
+  background-color:white;
+  border:0;
+}
+
+.line {
+  position:absolute;
+  width:120%;
+  left:-10%;
+  padding:0px;
+  margin:0px;
+  border: solid black 1px;
+  border-width:1px 0 1px 0;
+}
+
+#weekly {
+  background-color: green;
+  float:left;
+}
+
+#weekly>.fill {
+  height:65%;
+}
+
+#weekly>.line {
+  top:35%;
+}
+
+#taskly {
+  background-color: blue;
+  float:right;
+}
+
+#taskly>.fill {
+  height:30%;
+}
+
+#taskly>.line {
+  top:40%;
+}
+
+.timerAndControls {
+  height:90%;
+  width: 50%;
+  position: relative;
+  margin:15px auto 15px;
+}
+
+.timer {
+  font-size:54pt;
+}
+
+.controls>button {
+  font-size:24pt;
+}

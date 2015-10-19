@@ -52,3 +52,21 @@ function addTask_p() {
 		});
 	});
 }
+
+function getActiveTask_p() {
+	return new Promise(function(resolve, reject){
+		$.ajax({
+			dataType:"json",
+			error:reject,
+			method:'GET',
+			success:resolve,
+			url:'/active-task'
+		});
+	});
+}
+
+function getActiveTask() {
+	getActiveTask_p()
+	.then(t => t[0])
+	.then(t => console.log(t))
+}
