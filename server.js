@@ -19,6 +19,11 @@ app.get('/active-task', function (req, res) {
 		.then(function(d){res.send(d).end();});
 });
 
+app.post('/end-task', function (req, res) {
+	db.endActiveTaskPromise()
+		.then(function(d){res.send(d).end();});
+});
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.post('/log', function (req, res) {
 	console.log(req.body);

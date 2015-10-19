@@ -85,7 +85,7 @@ function getInsertPromise(collName, document){
 	return new Promise(function(resolve, reject){
 		Client.connect(url, function(err, db) {
 			if(err != null)
-					reject(err);
+				reject(err);
 			assert.equal(null, err);
 			db.collection(collName).insertOne(
 				document,
@@ -98,6 +98,25 @@ function getInsertPromise(collName, document){
 	});
 }
 module.exports.getInsertPromise = getInsertPromise;
+
+function endActiveTaskPromise() {
+	return new Promise(function(resolve, reject){
+		Client.connect(url, function(err, db) {
+			if(err != null)
+				reject(err);
+			assert.equal(null, err);
+			db.collection('task').updateOne(
+				{stopTime: null},
+				{$set: {"stopTime": new Date()}},
+				function(err, result){
+					db.close();
+					resolve(result);
+				}
+			);
+		});
+	});
+}
+module.exports.endActiveTaskPromise = endActiveTaskPromise;
 
 var allDocuments = function(collName){getQueryPromise(collName,{}).then(function(d){console.log(d)})};
 module.exports.allDocuments = allDocuments;

@@ -70,3 +70,20 @@ function getActiveTask() {
 	.then(t => t[0])
 	.then(t => console.log(t))
 }
+
+function endActiveTask_p() {
+	return new Promise(function(resolve, reject){
+		$.ajax({
+			dataType:"json",
+			error:reject,
+			method:'POST',
+			success:resolve,
+			url:'/end-task'
+		});
+	});
+}
+
+function endActiveTask() {
+	endActiveTask_p()
+	.then(d => console.log(d));
+}
