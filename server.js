@@ -42,5 +42,28 @@ app.post('/log', function (req, res) {
 			.then(function(d){res.send(d).end();});
 	}
 });
+
+app.post('/addActivity', function (req, res) {
+	console.log(req.body);
+	if(!req.body){
+		res.statusCode = 400;
+		res.send('No activity provided').end();
+	} else {
+		db.getInsertPromise('activity',req.body)
+			.then(function(d){res.send(d).end();});
+	}
+});
+
+app.post('/deleteActivity', function (req, res) {
+	console.log(req.body);
+	if(!req.body){
+		res.statusCode = 400;
+		res.send('No activity provided').end();
+	} else {
+		db.getRemovePromise('activity',req.body)
+			.then(function(d){res.send(d).end();});
+	}
+});
+	
  
 app.listen(PORT);

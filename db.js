@@ -6,7 +6,7 @@ var assert = require('assert');
 
 var Promise = require('promise');
 
-var url = 'mongodb://localhost:27017/test';
+var url = 'mongodb://127.0.0.1:27017/test';
 
 function findTasks(db, callback) {
    var cursor = db.collection('tasks').find( );
@@ -118,11 +118,33 @@ function endActiveTaskPromise() {
 }
 module.exports.endActiveTaskPromise = endActiveTaskPromise;
 
+function getRemovePromise(collName, query){
+	return new Promise(function(resolve, reject){
+		Client.connect(url, function(err, db) {
+			if(err != null)
+				reject(err);
+			assert.equal(null, err);
+			db.collection(collName).remove(
+				query,
+				function(err, result){
+					db.close();
+					resolve(result)
+				}
+			);
+		});
+	});
+}
+module.exports.getRemovePromise = getRemovePromise;
+
+
+
 var allDocuments = function(collName){getQueryPromise(collName,{}).then(function(d){console.log(d)})};
 module.exports.allDocuments = allDocuments;
 module.exports.insertThenShow = function(collName, document){getInsertPromise(collName, document).then(function(){allDocuments(collName)})};
 
 //Client.connect(url, function(err, db){db.collection('tasks').update({name: 'speedrunning'}, {$rename: {"schedule.perweek":"schedule.perWeek"}});})
+
+
 
 /* 
 sample activity document:
