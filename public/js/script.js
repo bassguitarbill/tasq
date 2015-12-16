@@ -42,7 +42,7 @@ function createNewActivity() {
 	addActivity_p({
 		name: activityName,
 		desc: description,
-		color: "pink",
+		color: getRandomColor(),
 		schedule:{
 			duration: time
 		}
