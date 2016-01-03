@@ -142,3 +142,21 @@ function endActiveTask() {
 	endActiveTask_p()
 	.then(d => console.log(d));
 }
+
+function getSurroundingTasks_p(date) {
+	return new Promise(function(resolve, reject){
+		$.ajax({
+			data:{date:date},
+			dataType:"json",
+			error:reject,
+			method:'POST',
+			success:resolve,
+			url:'/alg1'
+		});
+	});
+}
+
+function getSurroundingTasks(date) {
+	getSurroundingTasks_p(date)
+	.then(d => console.log(d));
+}

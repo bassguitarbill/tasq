@@ -136,7 +136,48 @@ function getRemovePromise(collName, query){
 }
 module.exports.getRemovePromise = getRemovePromise;
 
+function getTheSundayBefore(input){
+	var date = new Date(input);
+	date.setMilliseconds(0);
+	date.setSeconds(0);
+	date.setMinutes(0);
+	date.setHours(0);
+	date.setTime(date.getTime() - (date.getDay() * 1000 * 60 * 60 * 24));
+	return date;
+}
 
+function getOneWeekLater(input){
+	var date = new Date(input);
+	date.setTime(date.getTime() + (1000 * 60 * 60 * 24 * 7));
+	return date;
+}
+
+function getSurroundingWeekTasksPromise(date){
+	return new Promise(function(resolve, reject){
+		Client.connect(url, function(err, db) {
+			if(err != null)
+				reject(err);
+			assert.equal(err, null);
+			var startTime = getTheSundayBefore(date);
+			var endTime = getOneWeekLater(startTime);
+			console.log(startTime, endTime);
+			var cursor = db.collection('task').find({"startTime" : {'$gte': startTime, '$lte': endTime}});
+			var returnList = [];
+			cursor.each(function(err, doc) {
+				if(err != null)
+					reject(err);
+				assert.equal(err, null);
+				if (doc != null) {
+					returnList.push(doc);
+				} else {
+					db.close();
+					resolve(returnList); 
+				}
+			});
+		});
+	});
+}
+module.exports.getSurroundingWeekTasksPromise = getSurroundingWeekTasksPromise;
 
 var allDocuments = function(collName){getQueryPromise(collName,{}).then(function(d){console.log(d)})};
 module.exports.allDocuments = allDocuments;

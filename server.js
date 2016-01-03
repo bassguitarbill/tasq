@@ -64,6 +64,18 @@ app.post('/deleteActivity', function (req, res) {
 			.then(function(d){res.send(d).end();});
 	}
 });
+
+app.post('/alg1', function (req, res) {
+	console.log(req.body);
+	if(!req.body){
+		res.statusCode = 400;
+		res.send('No activity provided').end();
+	} else {
+	console.log(req.body.date);
+		db.getSurroundingWeekTasksPromise(req.body.date)
+			.then(function(d){res.send(d).end();});
+	}
+});
 	
  
 app.listen(PORT);
